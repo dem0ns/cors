@@ -5,10 +5,14 @@ const {Option} = Select;
 class Remote extends React.Component{
 
     state = {
-      url: "http://127.0.0.1/",
+      url: "",
       method: "GET"
     };
     cors = () =>  {
+        if (!this.state.url.startsWith("http") || !this.state.url.startsWith('https')) {
+            message.info("URL validate failed.");
+            return;
+        }
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if(this.readyState === 4)
@@ -51,7 +55,7 @@ class Remote extends React.Component{
             <div>
                 <h2>CORS POC</h2>
                 <div style={{ marginBottom: 16 }}>
-                    <Input addonBefore={this.selectBefore} value={this.state.url} onChange={this.handleUrlChange}/>
+                    <Input addonBefore={this.selectBefore} value={this.state.url} onChange={this.handleUrlChange} placeholder="http://127.0.0.1/"/>
                 </div>
                 <Button onClick={this.cors} type="primary">Fxxk It !</Button>
                 <hr/>
