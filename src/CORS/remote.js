@@ -9,7 +9,8 @@ class Remote extends React.Component{
       method: "GET"
     };
     cors = () =>  {
-        if (!this.state.url.startsWith("http") || !this.state.url.startsWith('https')) {
+        if (!this.state.url.startsWith("http") && !this.state.url.startsWith('https')) {
+            console.log(this.state.url.startsWith("http"));
             message.info("URL validate failed.");
             return;
         }
