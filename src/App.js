@@ -53,7 +53,7 @@ class App extends React.Component {
             </span>
                                 }
                             >
-                                <Menu.Item key="1">CORS GET</Menu.Item>
+                                <Menu.Item key="1">CORS</Menu.Item>
                             </SubMenu>
                             <SubMenu
                                 key="sub2"
