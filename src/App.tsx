@@ -9,21 +9,8 @@ const { Footer, Sider, Content } = Layout;
 
 class App extends React.Component {
 
-  rootSubmenuKeys = ['sub1'];
-
   state = {
     openKeys: ['sub1'],
-  };
-
-  onOpenChange = openKeys => {
-    const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
-    if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
-      this.setState({ openKeys });
-    } else {
-      this.setState({
-        openKeys: latestOpenKey ? [latestOpenKey] : [],
-      });
-    }
   };
 
   render() {
@@ -43,7 +30,6 @@ class App extends React.Component {
               theme="dark"
               mode="inline"
               openKeys={this.state.openKeys}
-              onOpenChange={this.onOpenChange}
               style={{ width: 256 }}
             >
               <SubMenu
