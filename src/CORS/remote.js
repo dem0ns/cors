@@ -114,7 +114,7 @@ class Remote extends React.Component{
                 </div>
 
                 <div style={{ marginBottom: 16 }} hidden={this.state.method !== 'POST'}>
-                    <TextArea rows={4} placeholder="POST Content" value={this.state.post_content} onChange={this.handlePostContentChange} autoSize={{ minRows: 3, maxRows: 5 }} />
+                    <TextArea rows={4} placeholder="POST Content" value={this.state.post_content} onChange={this.handlePostContentChange} />
                 </div>
                 <Button onClick={this.cors} type="danger">SEND XHR REQUEST!</Button>
                 <hr/>

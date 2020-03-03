@@ -1,7 +1,9 @@
 import React from 'react';
 import CorsRemote from './CORS/remote';
 import './App.css';
-import { Icon, Menu, Layout } from "antd";
+import { Menu, Layout } from "antd";
+import { MailOutlined } from '@ant-design/icons'
+
 const { SubMenu } = Menu;
 const { Footer, Sider, Content } = Layout;
 
@@ -48,7 +50,7 @@ class App extends React.Component {
                 key="sub1"
                 title={
                   <span>
-                    <Icon type="mail" />
+                    <MailOutlined />
                     <span>CORS</span>
                   </span>
                 }
