@@ -1,5 +1,5 @@
 import React from 'react';
-import {Select, Input, Button, message} from 'antd';
+import {Select, Input, Button, message, Form} from 'antd';
 
 const {Option} = Select;
 const {TextArea} = Input;
@@ -12,14 +12,15 @@ class Remote extends React.Component{
             url: "",
             method: "GET",
             content_type: "application/x-www-form-urlencoded",
-            post_content: ""
+            post_content: "",
+            header_key: "",
+            header_value: ""
         };
         this.handleMethodChange = this.handleMethodChange.bind(this);
     }
 
     cors = () =>  {
         if (!this.state.url.startsWith("http") && !this.state.url.startsWith('https')) {
-            console.log(this.state.url.startsWith("http"));
             message.info("URL validate failed.");
             return;
         }
@@ -32,11 +33,12 @@ class Remote extends React.Component{
                     case 200:
                         message.success("Perfect!");
                         document.querySelector("#html").innerHTML = this.responseText;
+                        console.log(unescape(encodeURIComponent(this.responseText)))
                         break;
                     case 0:
                         break;
                     default:
-                        message.warning("HTTP Code:" + this.status);
+                        message.warning("HTTP Code: " + this.status);
                         document.querySelector("#html").innerHTML = this.responseText.toString();
                         break;
                 }
@@ -45,6 +47,9 @@ class Remote extends React.Component{
         };
         xhttp.open(this.state.method, this.state.url, true);
         xhttp.withCredentials = true;
+        if (this.state.header_key !== "") {
+            xhttp.setRequestHeader(this.state.header_key, this.state.header_value);
+        }
         if (this.state.method === "POST") {
             xhttp.setRequestHeader("Content-Type", this.state.content_type);
         }
@@ -52,7 +57,7 @@ class Remote extends React.Component{
     };
 
     transferFailed = evt => {
-        if (evt.type === "error") message.error("Failed");
+        if (evt.type === "error") message.error("Error:"+evt.message);
     };
 
     handleUrlChange = (event) => {
@@ -98,7 +103,16 @@ class Remote extends React.Component{
                 <div style={{ marginBottom: 16 }}>
                     <Input addonBefore={selectBefore} value={this.state.url} onChange={this.handleUrlChange} placeholder="http://127.0.0.1/"/>
                 </div>
-
+                <div style={{ marginBottom: 16 }}>
+                    <Form name="headers" layout="inline">
+                        <Form.Item name="header_key">
+                            <Input placeholder="header key" onChange={e => this.setState({header_key: e.target.value})}/>
+                        </Form.Item>
+                        <Form.Item name="header_value">
+                            <Input placeholder="header value" onChange={e => this.setState({header_value: e.target.value})}/>
+                        </Form.Item>
+                    </Form>
+                </div>
                 <div style={{ marginBottom: 16 }} hidden={this.state.method !== 'POST'}>
                     <Select
                         showSearch
@@ -118,8 +132,7 @@ class Remote extends React.Component{
                 </div>
                 <Button onClick={this.cors} type="danger">SEND XHR REQUEST!</Button>
                 <hr/>
-                <div id="html">
-                </div>
+                <div id="html"/>
             </div>
         )
     }
