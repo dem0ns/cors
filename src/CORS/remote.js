@@ -57,7 +57,7 @@ class Remote extends React.Component{
     };
 
     transferFailed = evt => {
-        if (evt.type === "error") message.error("Error:"+evt.message);
+        if (evt.type === "error") message.error("Not success");
     };
 
     handleUrlChange = (event) => {
