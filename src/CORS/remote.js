@@ -4,7 +4,7 @@ import {Select, Input, Button, message, Form} from 'antd';
 const {Option} = Select;
 const {TextArea} = Input;
 
-class Remote extends React.Component{
+class Remote extends React.Component {
 
     constructor(props) {
         super(props);
@@ -19,15 +19,15 @@ class Remote extends React.Component{
         this.handleMethodChange = this.handleMethodChange.bind(this);
     }
 
-    cors = () =>  {
+    cors = () => {
         if (!this.state.url.startsWith("http") && !this.state.url.startsWith('https')) {
             message.info("URL validate failed.");
             return;
         }
         var xhttp = new XMLHttpRequest();
         var _this = this;
-        xhttp.onreadystatechange = function() {
-            if(this.readyState === 4){
+        xhttp.onreadystatechange = function () {
+            if (this.readyState === 4) {
                 console.log(this.prototype);
                 switch (this.status) {
                     case 200:
@@ -62,7 +62,7 @@ class Remote extends React.Component{
 
     handleUrlChange = (event) => {
         this.setState({
-            url : event.target.value,
+            url: event.target.value,
         })
     };
 
@@ -88,7 +88,7 @@ class Remote extends React.Component{
         var selectBefore = (
             <Select
                 defaultValue="GET"
-                style={{ width: 90 }}
+                style={{width: 90}}
                 value={this.state.method}
                 onChange={this.handleMethodChange}
             >
@@ -100,23 +100,26 @@ class Remote extends React.Component{
         return (
             <div>
                 <h2>CORS TEST</h2>
-                <div style={{ marginBottom: 16 }}>
-                    <Input addonBefore={selectBefore} value={this.state.url} onChange={this.handleUrlChange} placeholder="http://127.0.0.1/"/>
+                <div style={{marginBottom: 16}}>
+                    <Input addonBefore={selectBefore} value={this.state.url} onChange={this.handleUrlChange}
+                           placeholder="http://127.0.0.1/"/>
                 </div>
-                <div style={{ marginBottom: 16 }}>
+                <div style={{marginBottom: 16}}>
                     <Form name="headers" layout="inline">
                         <Form.Item name="header_key">
-                            <Input placeholder="header key" onChange={e => this.setState({header_key: e.target.value})}/>
+                            <Input placeholder="header key"
+                                   onChange={e => this.setState({header_key: e.target.value})}/>
                         </Form.Item>
                         <Form.Item name="header_value">
-                            <Input placeholder="header value" onChange={e => this.setState({header_value: e.target.value})}/>
+                            <Input placeholder="header value"
+                                   onChange={e => this.setState({header_value: e.target.value})}/>
                         </Form.Item>
                     </Form>
                 </div>
-                <div style={{ marginBottom: 16 }} hidden={this.state.method !== 'POST'}>
+                <div style={{marginBottom: 16}} hidden={this.state.method !== 'POST'}>
                     <Select
                         showSearch
-                        style={{ width: '100%' }}
+                        style={{width: '100%'}}
                         placeholder="Select a Content-Type"
                         optionFilterProp=""
                         value={this.state.content_type}
@@ -127,8 +130,12 @@ class Remote extends React.Component{
                     </Select>
                 </div>
 
-                <div style={{ marginBottom: 16 }} hidden={this.state.method !== 'POST'}>
-                    <TextArea rows={4} placeholder="POST Content" value={this.state.post_content} onChange={this.handlePostContentChange} />
+                <div style={{marginBottom: 16}} hidden={this.state.method !== 'POST'}>
+                    <TextArea
+                        rows={4} placeholder="POST Content"
+                        value={this.state.post_content}
+                        onChange={this.handlePostContentChange}
+                    />
                 </div>
                 <Button onClick={this.cors} type="danger">SEND XHR REQUEST!</Button>
                 <hr/>
