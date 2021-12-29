@@ -25,6 +25,7 @@ class Remote extends React.Component {
             return;
         }
         var xhttp = new XMLHttpRequest();
+        xhttp.withCredentials = true;
         var _this = this;
         xhttp.onreadystatechange = function () {
             if (this.readyState === 4) {
