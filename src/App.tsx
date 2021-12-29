@@ -37,7 +37,7 @@ class App extends React.Component {
                         </Content>
                         <Footer style={{textAlign: 'center'}}>Cyber Security Tools <a
                             href="https://github.com/dem0ns" target="_blank"
-                            rel="noopener noreferrer">Dem0ns</a> ©2020-2021</Footer>
+                            rel="noopener noreferrer">Dem0ns</a> ©2020-2022</Footer>
                     </Layout>
                 </Layout>
             </div>
